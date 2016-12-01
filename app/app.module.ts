@@ -1,3 +1,4 @@
+// Modules
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
@@ -10,6 +11,7 @@ import { ChartsModule } from 'ng2-charts';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './services/in-memory-data.service';
 
+// Components
 import { AppComponent }  from './app.component';
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { HeroesComponent } from './components/heroes/heroes.component';
@@ -18,7 +20,9 @@ import { HeroSearchComponent } from './components/hero-search/hero-search.compon
 import { GridComponent } from './components/grid-demo/grid.component';
 import { ChartComponent } from './components/chart-demo/chart.component';
 
+//Services
 import { HeroService } from './services/hero.service';
+import { ChartDataService } from "./services/chart.data.service";
 
 import './rxjs-extensions';
 
@@ -41,7 +45,10 @@ import './rxjs-extensions';
     GridComponent,
     ChartComponent
   ],
-  providers: [HeroService],
+  providers: [
+    HeroService,
+    ChartDataService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

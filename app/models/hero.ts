@@ -1,4 +1,13 @@
-export class Hero {
+import {AbstractProjectableObject, Projectable} from "./abstract-object";
+
+export class Hero extends AbstractProjectableObject {
   id: number;
-  name: string;
+  @Projectable
+  strength: number;
+  @Projectable
+  intelligence: number;
+  @Projectable
+  stealth: number;
+  @Projectable
+  speed: number;
 }

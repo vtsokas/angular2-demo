@@ -14,8 +14,13 @@ export class HeroService{
 
   getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl)
+      .map(res => {
+        return res.json().data.map((row:any) => {
+          // Use row to create an instance of Hero
+          return new Hero(row);
+        });
+      })
       .toPromise()
-      .then(response => response.json().data as Hero[])
       .catch(this.handleError);
   }
 

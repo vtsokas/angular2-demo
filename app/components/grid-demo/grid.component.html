@@ -1,0 +1,30 @@
+<div>
+  <h3>Single Row Selection</h3>
+  <div style='float:left;width:75%'>
+    <datatable
+      class="material"
+      [rows]="rows"
+      [columnMode]="'force'"
+      [columns]="columns"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="5"
+      [selected]="selected"
+      [selectionType]="'single'"
+      (activate)="onActivate($event)"
+      (select)='onSelect($event)'>
+    </datatable>
+  </div>
+
+  <div class='selected-column' style='float:left;width:25%'>
+    <!--<h4>Selections</h4>-->
+    <ul>
+      <div *ngFor='let sel of selected'>
+        <!--{{sel.name}}-->
+        <chart-demo [selected]="selected"></chart-demo>
+      </div>
+      <li *ngIf="!selected.length">No Selections</li>
+    </ul>
+  </div>
+</div>
