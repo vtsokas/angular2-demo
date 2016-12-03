@@ -1,7 +1,7 @@
 // Modules
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { Angular2DataTableModule } from 'angular2-data-table';
@@ -19,17 +19,20 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 import { HeroSearchComponent } from './components/hero-search/hero-search.component';
 import { GridComponent } from './components/grid-demo/grid.component';
 import { ChartComponent } from './components/chart-demo/chart.component';
+import {HeroFormComponent} from "./components/hero-form/hero-form.component";
 
 //Services
 import { HeroService } from './services/hero.service';
 import { ChartDataService } from "./services/chart.data.service";
 
 import './rxjs-extensions';
+import {HeroNameUniqueValidator} from "./directives/hero-name-unique.validator";
 
 @NgModule({
   imports:      [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
@@ -43,11 +46,14 @@ import './rxjs-extensions';
     HeroDetailComponent,
     HeroSearchComponent,
     GridComponent,
-    ChartComponent
+    ChartComponent,
+    HeroFormComponent,
+    HeroNameUniqueValidator
   ],
   providers: [
     HeroService,
-    ChartDataService
+    ChartDataService,
+    HeroNameUniqueValidator
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataService } from "../../services/chart.data.service";
+import { HeroViewService } from '../../services/hero.view.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -10,11 +12,20 @@ export class ChartComponent implements OnInit {
   @Input()
   selected:IProjectable[];
 
+  subscription: Subscription;
+
   public radarChartLabels:string[] = [];
   public radarChartData:any = [];
   public radarChartType:string = 'radar';
 
-  constructor(private chartDataService: ChartDataService){}
+  constructor(private chartDataService: ChartDataService, private heroViewService: HeroViewService){
+    this.subscription = heroViewService.selectedHeroes$.subscribe(
+      selected => {
+        this.selected.push(selected);
+        this.ngOnInit();
+      }
+    );
+  }
 
   public chartClicked(e:any):void {}
 
@@ -27,4 +38,5 @@ export class ChartComponent implements OnInit {
       this.radarChartLabels = chartData.labels;
     }
   }
+
 }

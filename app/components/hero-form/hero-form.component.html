@@ -1,0 +1,35 @@
+<form [formGroup]="heroForm" novalidate (ngSubmit)="save(heroForm.value, heroForm.valid)">
+
+  <div>
+    <label>Name</label>
+    <input validateHeroNameUnique type="text" formControlName="name">
+    <small [hidden]="heroForm.controls.name.valid || (heroForm.controls.name.pristine && !submitted)">
+      please insert a unique hero name
+    </small>
+  </div>
+
+  <div>
+    <label>Strength</label>
+    <input type="number" formControlName="strength">
+  </div>
+
+  <div>
+    <label>Speed</label>
+    <input type="number" formControlName="speed">
+  </div>
+
+  <div>
+    <label>Stealth</label>
+    <input type="number" formControlName="stealth">
+  </div>
+
+  <div>
+    <label>Intelligence</label>
+    <input type="number" formControlName="intelligence">
+  </div>
+
+  <input type="hidden" formControlName="id">
+
+  <button type="submit">Submit</button>
+
+</form>

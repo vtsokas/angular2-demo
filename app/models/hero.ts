@@ -1,6 +1,6 @@
 import {AbstractProjectableObject, Projectable} from "./abstract-object";
 
-export class Hero extends AbstractProjectableObject {
+export class Hero extends AbstractProjectableObject implements HeroInterface {
   id: number;
   @Projectable
   strength: number;

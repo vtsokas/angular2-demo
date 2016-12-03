@@ -2,11 +2,13 @@ export class AbstractObject{
   /**
    * Exchange properties with JS Object
    */
-  constructor(data:Object){
+  exchange(data:Object){
     Object.keys(data).forEach( key => {
       this[key] = data[key];
     });
   }
+
+  constructor(data?:Object){ this.exchange(data) }
 }
 
 export class AbstractProjectableObject extends AbstractObject implements IProjectable{

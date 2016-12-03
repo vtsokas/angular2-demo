@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 // Services
 import { HeroService } from '../../services/hero.service';
+import { HeroViewService } from '../../services/hero.view.service';
 // Models
 import { Hero } from '../../models/hero';
-
-import any = jasmine.any;
 
 @Component({
   moduleId: module.id,
   selector: 'grid-demo',
-  templateUrl: 'grid.component.html'
+  templateUrl: 'grid.component.html',
+  providers: [ HeroViewService ]
 })
 export class GridComponent implements OnInit{
 
   rows: any[] = [];
+  @Output()
   selected:Hero[] = [];
   columns: any[] = [];
 
-  constructor(private heroService: HeroService) {}
+  constructor(private heroService: HeroService, private heroViewService: HeroViewService) {}
 
   getHeroes(){
     this.heroService.getHeroes().then(heroes => {
@@ -34,9 +34,12 @@ export class GridComponent implements OnInit{
     });
   }
 
-  onSelect({ selected }:any) {
+  onSelect({ selected }:any) {    console.log('Select Event', selected, this.selected);
+
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
+
+    this.heroViewService.selectHero(selected);
   }
 
   onActivate(event:any) {}

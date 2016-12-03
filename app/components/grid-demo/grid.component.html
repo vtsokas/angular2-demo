@@ -11,7 +11,7 @@
       [rowHeight]="'auto'"
       [limit]="5"
       [selected]="selected"
-      [selectionType]="'single'"
+      [selectionType]="'multi'"
       (activate)="onActivate($event)"
       (select)='onSelect($event)'>
     </datatable>
@@ -20,7 +20,7 @@
   <div class='selected-column' style='float:left;width:25%'>
     <!--<h4>Selections</h4>-->
     <ul>
-      <div *ngFor='let sel of selected'>
+      <div *ngIf='selected.length'>
         <!--{{sel.name}}-->
         <chart-demo [selected]="selected"></chart-demo>
       </div>

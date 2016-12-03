@@ -54,6 +54,15 @@ export class HeroService{
       .catch(this.handleError);
   }
 
+  isHeroNameUnique(name: string, id: number): Promise<Hero>{
+    /**
+     * Returns a promise that resolves to a Hero if the name sent
+     * is found for someone with a different id
+     */
+    return this.getHeroes()
+    .then(heroes => heroes.find(hero => (hero.name === name && hero.id !== id )));
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
