@@ -1,6 +1,12 @@
 <div>
   <h3>Single Row Selection</h3>
   <div style='float:left;width:75%'>
+    <input
+      type='text'
+      style='padding:8px;margin:15px auto;width:30%;'
+      placeholder='Type to filter the name column...'
+      (keyup)='updateFilter($event)'
+    />
     <datatable
       class="material"
       [rows]="rows"
@@ -18,10 +24,8 @@
   </div>
 
   <div class='selected-column' style='float:left;width:25%'>
-    <!--<h4>Selections</h4>-->
     <ul>
       <div *ngIf='selected.length'>
-        <!--{{sel.name}}-->
         <chart-demo [selected]="selected"></chart-demo>
       </div>
       <li *ngIf="!selected.length">No Selections</li>

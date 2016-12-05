@@ -4,7 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Hero } from "../../models/hero";
 import { HeroService } from "../../services/hero.service";
 import 'rxjs/add/operator/switchMap';
-import {HeroNameUniqueValidator} from "../../directives/hero-name-unique.validator";
+import { HeroNameUniqueValidator } from "../../directives/hero-name-unique.validator";
 
 @Component({
   moduleId: module.id,
@@ -25,18 +25,15 @@ export class HeroFormComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    /**
+     * Create the form
+     */
     this.heroForm = this._fb.group({
       id: [-1, <any>Validators.nullValidator],
       name: ['',
-        //Synchronous
-        [
-          <any>Validators.required,
-        ],
-        //Asynchronous
-        /**
-         * @todo
-         * I don't like this instantiation
-         */
+        /** Synchronous */
+        [ <any>Validators.required ],
+        /** Asynchronous @todo Avoid instantiation*/
         new HeroNameUniqueValidator(this.heroService).validator
       ],
       strength:  [0, <any>Validators.nullValidator],
@@ -44,10 +41,17 @@ export class HeroFormComponent implements OnInit{
       stealth:  [0, <any>Validators.nullValidator],
       intelligence:  [0, <any>Validators.nullValidator]
     });
+    /**
+     * Find the object by id from route
+     */
     this.route.params
       .switchMap((params: Params) => this.heroService.getHero(+params['id']))
       .subscribe( hero => {
         if(!!hero){
+          /**
+           * If we get an object (ie form for add),
+           * bind it to the form
+           */
           (<FormGroup>this.heroForm).setValue(hero, {onlySelf:true});
         }
       } );

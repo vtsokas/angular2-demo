@@ -5,11 +5,14 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class HeroViewService{
 
-  private selectedHeroesSource = new Subject<IProjectable>();
-
-  selectedHeroes$ = this.selectedHeroesSource.asObservable();
-
-  selectHero(hero:IProjectable[]){console.log(hero);
-    this.selectedHeroesSource.next(hero[hero.length - 1]);
+  private messageQueue = new Subject<string>();
+  messageQueue$ = this.messageQueue.asObservable();
+  /**
+   * Actually, we just push a message to the source
+   * that triggers the observer to take new selected
+   * data from where he knows to
+   */
+  heroSelectionChanged(): void {
+    this.messageQueue.next('heroSelectionChanged');
   }
 }

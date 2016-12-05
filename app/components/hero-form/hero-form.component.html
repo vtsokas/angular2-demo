@@ -2,7 +2,7 @@
 
   <div>
     <label>Name</label>
-    <input validateHeroNameUnique type="text" formControlName="name">
+    <input type="text" formControlName="name">
     <small [hidden]="heroForm.controls.name.valid || (heroForm.controls.name.pristine && !submitted)">
       please insert a unique hero name
     </small>

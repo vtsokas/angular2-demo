@@ -19,10 +19,16 @@ export class ChartComponent implements OnInit {
   public radarChartType:string = 'radar';
 
   constructor(private chartDataService: ChartDataService, private heroViewService: HeroViewService){
-    this.subscription = heroViewService.selectedHeroes$.subscribe(
-      selected => {
-        this.selected.push(selected);
-        this.ngOnInit();
+    /**
+     * Here we just listen for an event that declares
+     * change in the selection and take the selected array
+     * from the bound input variable (just call ngOnInit)
+     */
+    this.subscription = heroViewService.messageQueue$.subscribe(
+      message => {
+        if (message == 'heroSelectionChanged'){
+          this.ngOnInit();
+        }
       }
     );
   }

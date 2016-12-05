@@ -1,9 +1,9 @@
-<div style="display: block">  <button (click)="ngOnInit()">refresh</button>
-
+<div style="display: block">
   <canvas baseChart
           [datasets]="radarChartData"
           [labels]="radarChartLabels"
           [chartType]="radarChartType"
           (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
+          (chartClick)="chartClicked($event)">
+  </canvas>
 </div>

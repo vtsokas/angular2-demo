@@ -2,7 +2,6 @@ import {Component, OnInit, Output} from '@angular/core';
 // Services
 import { HeroService } from '../../services/hero.service';
 import { HeroViewService } from '../../services/hero.view.service';
-// Models
 import { Hero } from '../../models/hero';
 
 @Component({
@@ -14,6 +13,7 @@ import { Hero } from '../../models/hero';
 export class GridComponent implements OnInit{
 
   rows: any[] = [];
+  temp: any[] = [];
   @Output()
   selected:Hero[] = [];
   columns: any[] = [];
@@ -23,6 +23,7 @@ export class GridComponent implements OnInit{
   getHeroes(){
     this.heroService.getHeroes().then(heroes => {
       this.rows = heroes;
+      this.temp = [...heroes];
       /**
        * Get the column definitions
        * dynamically from first row
@@ -34,15 +35,27 @@ export class GridComponent implements OnInit{
     });
   }
 
-  onSelect({ selected }:any) {    console.log('Select Event', selected, this.selected);
+  onSelect({ selected }:any) {
 
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
 
-    this.heroViewService.selectHero(selected);
+    this.heroViewService.heroSelectionChanged();
   }
 
   onActivate(event:any) {}
+
+  updateFilter(event:any) {
+    let val = event.target.value;
+
+    // filter our data
+    let temp = this.temp.filter(function(d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.rows = temp;
+  }
 
   ngOnInit(){
     /**

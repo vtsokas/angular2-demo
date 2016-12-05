@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
                 <a routerLink="/dashboard">Dashboard</a>
                 <a routerLink="/heroes">Heroes</a>
                 <a routerLink="/grid">Data table</a>
-                <a routerLink="/chart">Chart</a>
               </nav>
               <router-outlet></router-outlet>
             `,

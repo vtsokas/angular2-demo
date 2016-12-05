@@ -1,12 +1,12 @@
 import { Directive, forwardRef } from '@angular/core';
 import { NG_VALIDATORS, FormControl } from '@angular/forms';
-import {HeroService} from "../services/hero.service";
+import { HeroService } from "../services/hero.service";
 
 /**
  * This method is used for asynchronous validation
  */
 function validateHeroNameUniqueFactory(heroService: HeroService){
-  return (c: FormControl):  Promise<any> =>  {console.log(c);
+  return (c: FormControl):  Promise<any> =>  {
     return new Promise( (resolve, reject) => {
       heroService.isHeroNameUnique(c.value, c.parent.value.id)
         .then( hero => {
